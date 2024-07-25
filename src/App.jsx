@@ -1,11 +1,11 @@
 import './App.css';
-import TravelPlan from './components/TravelPlan';
+import Hero from './components/Hero';
 
 function App() {
 
   return (
     <>
-      <TravelPlan />
+      <Hero />
     </>
   );
 }
