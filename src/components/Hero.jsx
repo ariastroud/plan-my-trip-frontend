@@ -1,4 +1,5 @@
 import palmTrees from "../assets/images/palmTrees.jpg";
+import './Hero.css';
 
 const Hero = () => {
 return (

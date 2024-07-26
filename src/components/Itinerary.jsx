@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Itinerary = ({ travelPlansData }) => {
+const Itinerary = ({ travelPlansData, handleDayClick}) => {
     const { itinerary } = travelPlansData;
 
     return (
@@ -9,7 +9,7 @@ const Itinerary = ({ travelPlansData }) => {
                 {itinerary.map((day) => {
                     return (
                         <li className='p-4' key={day.day}>
-                            <h2 className='font-bold'>Day {day.day}</h2>
+                            <h2 className='font-bold text-lg hover:underline cursor-pointer hover:text-bright-green' onClick={() => handleDayClick(day.day)}>Day {day.day}</h2>
                             <ul className="list-disc">
                                 {day.activities.map((activity) => (
                                     <li key={activity.id}>
@@ -17,6 +17,17 @@ const Itinerary = ({ travelPlansData }) => {
                                     </li>   
                                 ))}
                             </ul>
+                            <div>
+                                <h3 className='font-bold mt-4'>Where to Eat</h3>
+                                <ul className="list-disc">
+                                    {day.placesToEat.map((restaurant) => (
+                                        <li key={restaurant.id}>
+                                            <span className="font-semibold">{restaurant.place}</span>: <span>{restaurant.description}</span>
+                                        </li>   
+                                    ))}
+                                </ul>
+                            </div>
+                    
                         </li>
                     );
                 })}
@@ -26,6 +37,7 @@ const Itinerary = ({ travelPlansData }) => {
     };
 
 Itinerary.propTypes = {
+    handleDayClick: PropTypes.func.isRequired,
     travelPlansData: PropTypes.shape({
         destination: PropTypes.string.isRequired,
         itinerary: PropTypes.arrayOf(PropTypes.shape({
