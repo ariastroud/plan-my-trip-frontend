@@ -1,5 +1,6 @@
 import Itinerary from "./Itinerary";
 import Map from "./Map";
+import axios from "axios";
 
 const TravelPlan = () => {
     const travelPlansData = {
@@ -46,6 +47,24 @@ const TravelPlan = () => {
           }
         ]
       };
+
+    const mockTravelPlan = {
+      "destination": "Tokyo, Japan",
+      "start_date": "2024-09-01T00:00:00",
+      "end_date": "2024-09-03T00:00:00",
+      "budget": 5000,
+      "user_id": 1
+    };
+
+    const saveTrip = async () => {
+      try {
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips`, mockTravelPlan);
+        console.log(response.data);
+        console.log('response data:', response.data);
+      } catch (error) {
+        console.error('There was an error!', error);
+      }
+    };
       
     return (
         <div>
@@ -56,7 +75,7 @@ const TravelPlan = () => {
                 <Itinerary travelPlansData={travelPlansData}/>
                 <Map travelPlansData={travelPlansData} />
             </div>
-            <button className="btn btn-secondary">Save Trip</button>
+            <button className="btn btn-secondary" onClick={saveTrip}>Save Trip</button>
         </div>
     );
 };

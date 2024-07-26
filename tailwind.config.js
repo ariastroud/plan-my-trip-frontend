@@ -6,7 +6,14 @@ export default {
   "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",],
 
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        custom: ["Coconat", "sans-serif"],
+      },
+      colors: {
+        "bright-green": "#BADA55",
+      },
+    },
   },
   plugins: [daisyui],
 

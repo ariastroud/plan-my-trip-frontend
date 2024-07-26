@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 
 const Map = ({ travelPlansData }) => {
     const { itinerary, latitudeDestination, longitudeDestination } = travelPlansData;
 
     return (
-        <div className="h-screen w-full outline outline-rose-900">
+        <div className="h-screen w-full">
             <MapContainer className="h-full w-full" center={[latitudeDestination, longitudeDestination]} zoom={13} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

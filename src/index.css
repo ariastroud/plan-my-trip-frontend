@@ -12,6 +12,9 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  margin: 0;
+@font-face {
+  font-family: 'Coconat';
+  src: url('/fonts/Coconat-Demi.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
