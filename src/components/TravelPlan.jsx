@@ -2,6 +2,7 @@ import Itinerary from "./Itinerary";
 import Map from "./Map";
 import axios from "axios";
 import { useState } from "react";
+import NavBar from "./NavBar";
 
 const TravelPlan = () => {
     const [selectedDay, setSelectedDay] = useState(null);
@@ -90,6 +91,8 @@ const TravelPlan = () => {
     };
       
     return (
+      <div>
+        <NavBar />
         <div className="mx-8">
             <h1 className="font-extrabold text-2xl">Travel Plan for {travelPlansData.destination}</h1>
             <p>{travelPlansData.startDate} - {travelPlansData.endDate}</p>
@@ -100,6 +103,8 @@ const TravelPlan = () => {
             </div>
             <button className="btn btn-secondary" onClick={saveTrip}>Save Trip</button>
         </div>
+      </div>
+        
     );
 };
 

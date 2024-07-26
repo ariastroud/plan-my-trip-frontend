@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
+import NavBar from './NavBar';
 
 
 const options = [
@@ -40,7 +41,9 @@ const PlanTrip = () => {
 
 
   return (
-    <div className="card lg:card-side bg-base-100 shadow-xl">
+    <div>
+      <NavBar />
+      <div className="card lg:card-side bg-base-100 shadow-xl">
     <figure className="px-10 pt-10">
         <img
         src={planTrip}
@@ -118,6 +121,8 @@ const PlanTrip = () => {
       </div>
     </div>
 
+    </div>
+    
   );
 };
 
