@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Datepicker from "react-tailwindcss-datepicker";
+
+
 const options = [
     { value: 'adventure', label: 'Adventure' },
     { value: 'relaxation', label: 'Relaxation' },
@@ -8,10 +11,19 @@ const options = [
 const PlanTrip = () => {
 
     const [ destination, setDestination ] = useState(''),
-          [ dates, setDates ]             = useState(''),
+          [ dates, setDates ]             = useState({
+            startDate: null,
+            endDate: null
+            }),
           [ budget, setBudget ]           = useState(''),
           [ travelStyle, setTravelStyle ] = useState(''),
           [ preferences, setPreferences ] = useState('');
+
+
+        const handleDateChange = (newDates) => {
+        console.log("newDates:", newDates);
+        setDates(newDates);
+        }
 
     const handleGeneratePlan = () => {
         event.preventDefault();
@@ -50,12 +62,15 @@ const PlanTrip = () => {
 
       <label className="input input-bordered flex items-center gap-2">
       Dates:
-        <input type="text"
-               className="grow"
-               placeholder="When do you want to go?"
-               value={dates}
-               onChange={(e) => setDates(e.target.value)}/>
+      <Datepicker
+            value={dates}
+            onChange={handleDateChange}
+            showShortcuts={false}
+            />
       </label>
+
+
+
       <label className="input input-bordered flex items-center gap-2">
       Budget:
         <input type="text"
@@ -90,7 +105,9 @@ const PlanTrip = () => {
                onChange={(e) => setPreferences(e.target.value)}/>
         <span className="badge badge-info">Optional</span>
       </label>
+
       <div className="divider"></div>
+
         <button className="btn btn-primary"
                 type="submit"
                 onClick={handleGeneratePlan}>Generate Travel Plan</button>
