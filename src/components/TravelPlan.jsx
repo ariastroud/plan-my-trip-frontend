@@ -8,6 +8,7 @@ const TravelPlan = () => {
     const [selectedDay, setSelectedDay] = useState(null);
 
     const handleDayClick = (day) => {
+        console.log(day)
       setSelectedDay((prevSelectedDay) => (prevSelectedDay === day ? null : day));
   };
 

@@ -2,6 +2,10 @@ import PropTypes from 'prop-types';
 
 const Itinerary = ({ travelPlansData, handleDayClick}) => {
     const { itinerary } = travelPlansData;
+    
+    if (!itinerary || itinerary.length === 0) {
+        return <div>An error occurred! Missing itinerary data.</div>;
+    }
 
     return (
         <div>

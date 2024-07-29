@@ -4,6 +4,10 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 const Map = ({ travelPlansData, selectedDay }) => {
     const { itinerary, latitudeDestination, longitudeDestination } = travelPlansData;
 
+    if (!itinerary || itinerary.length === 0 || !latitudeDestination || !longitudeDestination) {
+        return <div>An error occurred! Missing data.</div>;
+    }
+
     const filteredMarkers = itinerary.flatMap((day) => {
         if (selectedDay == null || selectedDay === day.day) {
             return [
@@ -20,6 +24,7 @@ const Map = ({ travelPlansData, selectedDay }) => {
         return [];
     });
 
+    console.log("filteredMarkers", filteredMarkers);
     return (
         <div className="h-screen w-full">
             <MapContainer className="h-full w-full" center={[latitudeDestination, longitudeDestination]} zoom={12} scrollWheelZoom={true}>
