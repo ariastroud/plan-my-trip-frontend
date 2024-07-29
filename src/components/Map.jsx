@@ -24,7 +24,6 @@ const Map = ({ travelPlansData, selectedDay }) => {
         return [];
     });
 
-    console.log("filteredMarkers", filteredMarkers);
     return (
         <div className="h-screen w-full">
             <MapContainer className="h-full w-full" center={[latitudeDestination, longitudeDestination]} zoom={12} scrollWheelZoom={true}>
