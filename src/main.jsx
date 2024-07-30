@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import App from './App.jsx';
 import './index.css';
-import TravelPlan from './components/TravelPlan.jsx';
-import PlanTrip from './components/PlanTrip.jsx';
+import TravelPlan from './pages/TravelPlan.jsx';
+import PlanTrip from './pages/PlanTrip.jsx';
+import UserProfile from './pages/UserProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/travelplan",
     element: <TravelPlan />,
+  },
+  {
+    path: "/userprofile",
+    element: <UserProfile />,
   },
 ]);
 

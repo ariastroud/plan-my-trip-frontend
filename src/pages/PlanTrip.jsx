@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 
 
 const options = [
@@ -122,7 +122,7 @@ const PlanTrip = () => {
     </div>
 
     </div>
-    
+
   );
 };
 

@@ -1,5 +1,5 @@
 import palmTrees from "../assets/images/palmTrees.jpg";
-import AuthManager from "./AuthManager";
+import AuthManager from "../components/AuthManager";
 import './Hero.css';
 
 const Hero = () => {

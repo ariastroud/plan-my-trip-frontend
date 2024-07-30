@@ -1,8 +1,8 @@
-import Itinerary from "./Itinerary";
-import Map from "./Map";
+import Itinerary from "../components/Itinerary";
+import Map from "../components/Map";
 import axios from "axios";
 import { useState } from "react";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 
 const TravelPlan = () => {
     const [selectedDay, setSelectedDay] = useState(null);
@@ -89,7 +89,7 @@ const TravelPlan = () => {
         console.error('There was an error!', error);
       }
     };
-      
+
     return (
       <div>
         <NavBar />
@@ -104,7 +104,7 @@ const TravelPlan = () => {
             <button className="btn btn-secondary" onClick={saveTrip}>Save Trip</button>
         </div>
       </div>
-        
+
     );
 };
 
