@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import App from './App.jsx';
 import './index.css';
-import TravelPlan from './pages/TravelPlan.jsx';
-import PlanTrip from './pages/PlanTrip.jsx';
 import UserProfile from './pages/UserProfile.jsx';
+import TripManager from './pages/TripManager.jsx';
 
 const router = createBrowserRouter([
   {
@@ -13,12 +12,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/plantrip",
-    element: <PlanTrip />,
-  },
-  {
-    path: "/travelplan",
-    element: <TravelPlan />,
+    path: "/tripmanager",
+    element: <TripManager />,
   },
   {
     path: "/userprofile",

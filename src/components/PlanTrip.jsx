@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
-import NavBar from '../components/NavBar';
+import NavBar from './NavBar';
+import testTravelPlansData from '../testData';
 
 
 const options = [
@@ -10,7 +11,12 @@ const options = [
     { value: 'sightseeing', label: 'Sightseeing' },
     { value: 'family', label: 'Family' },
   ];
-const PlanTrip = () => {
+const PlanTrip = ({handleTravelPlansData}) => {
+
+  //testing purposes
+    const handleClick = () => {
+        handleTravelPlansData(testTravelPlansData);
+    };
 
     const [ destination, setDestination ] = useState(''),
           [ dates, setDates ]             = useState({
@@ -66,6 +72,8 @@ const PlanTrip = () => {
     <div>
       <NavBar />
       <div className="card lg:card-side bg-base-100 shadow-xl">
+      {/* Testing purposes */}
+      <button className="btn btn-primary" onClick={handleClick}>Test Data</button>
     <figure className="px-10 pt-10">
         <img
         src={planTrip}

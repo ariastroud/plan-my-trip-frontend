@@ -85,7 +85,7 @@ const AuthManager = () => {
     };
 
     if (redirectToPlanTrip) {
-        return <Navigate to="/plantrip" />;
+        return <Navigate to="/tripmanager" />;
     }
 
     return (
