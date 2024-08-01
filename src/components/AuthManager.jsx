@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 
 const AuthManager = () => {
+    const [redirectToPlanTrip, setRedirectToPlanTrip] = useState(false);
     const [currentForm, setCurrentForm] = useState('login');
     const toggleLogInSignUp = (form) => {
         if (form === 'login') {
@@ -55,7 +56,6 @@ const AuthManager = () => {
         }
     };
 
-    const navigate = useNavigate();
     const logInUser = async (usernameOrEmail, password) => {
         const requestBody = { "username/email": usernameOrEmail, password: password };
         try {
@@ -64,7 +64,7 @@ const AuthManager = () => {
             setLogInUserData(response.data.user);
             localStorage.setItem("logInData", JSON.stringify(response.data.user));
 
-            navigate('/plantrip');
+            setRedirectToPlanTrip(true);
         } catch (error) {
             console.error('There was an error!', error.response.data.error);
             setLogInError(error.response.data.error);
@@ -83,6 +83,10 @@ const AuthManager = () => {
             setLogInError(error.response.data.error);
         }
     };
+
+    if (redirectToPlanTrip) {
+        return <Navigate to="/plantrip" />;
+    }
 
     return (
         <div>

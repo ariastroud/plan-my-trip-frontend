@@ -12,7 +12,7 @@ const SignUp = ({toggleLogInSignUp, logInError, formFields, handleChange, handle
                     <p className="text-black text-left mb-0 text-base"> Already have an account?</p>
                     <button className="btn btn-link no-underline hover:underline -ml-3 text-base text-secondary on" onClick={() => toggleLogInSignUp('login')}>Log in</button>
                 </div>
-                <form className="grid grid-cols-1 gap-2" onSubmit={handleSubmit}>
+                <form data-testid="signup-form" className="grid grid-cols-1 gap-2" onSubmit={handleSubmit}>
                     <label className="input input-bordered flex items-center gap-2 text-black">
                     <input 
                         type="text" 
@@ -47,7 +47,7 @@ const SignUp = ({toggleLogInSignUp, logInError, formFields, handleChange, handle
                         />
                     </label>
                     <p className='text-sm text-black'>Password must be at least 8 characters long, contain at least one uppercase letter and must contain at least one digit.</p>
-                    <button className="btn btn-secondary mt-4">Sign up</button>
+                    <button type="submit" className="btn btn-secondary mt-4">Sign up</button>
                 </form>
                 {logInError ? <div className="text-red-500 text-sm">{logInError}</div> : null}
             </div>
