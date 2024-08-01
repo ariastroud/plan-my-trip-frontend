@@ -30,6 +30,28 @@ const PlanTrip = () => {
     const handleGeneratePlan = () => {
         event.preventDefault();
     // Handle the logic for generating the travel plan
+    fetch('/api/generate-trip-plan', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+      destination,
+      dates,
+      budget,
+      travelStyle,
+      preferences
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle the error
+      console.error(error);
+    });
     console.log({
         destination,
         dates,

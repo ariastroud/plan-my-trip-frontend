@@ -1,6 +1,5 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
-import Itinerary from '../components/Itinerary';
 
 const UserProfile = () => {
   const user = {
@@ -54,7 +53,6 @@ const UserProfile = () => {
      />
   <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
     Tab content 2
-    <Itinerary />
   </div>
 
 
