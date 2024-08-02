@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
 import NavBar from '../components/NavBar';
+import axios from "axios";
 
+// const axios = require('axios');
 
 const options = [
     { value: 'adventure', label: 'Adventure' },
@@ -22,36 +24,44 @@ const PlanTrip = () => {
           [ preferences, setPreferences ] = useState('');
 
 
-        const handleDateChange = (newDates) => {
-        console.log("newDates:", newDates);
-        setDates(newDates);
-        }
+    const handleDateChange = (newDates) => {
+    console.log("newDates:", newDates);
+    setDates(newDates);
+    }
 
-    const handleGeneratePlan = () => {
-        event.preventDefault();
+    const handleGeneratePlan = async (e)  => {
+        e.preventDefault();
     // Handle the logic for generating the travel plan
-    fetch('/api/generate-trip-plan', {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-      destination,
-      dates,
-      budget,
-      travelStyle,
-      preferences
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Handle the response data
-      console.log(data);
-    })
-    .catch(error => {
-      // Handle the error
-      console.error(error);
-    });
+    const requestBody = {
+      destination: destination,
+      dates: dates,
+      budget: budget,
+      travelStyle: travelStyle,
+      preferences: preferences};
+    try {
+      //`${import.meta.env.VITE_BASE_URL}/trip/generate-trip-plan`
+        const response = await axios.post('https://plan-my-trip-backend-kxq6.onrender.com//trip/generate-trip-plan', requestBody);
+        console.log(response.data);
+
+    } catch (error) {
+        console.error('There was an error!', error.response.data.error);
+        console.error('Error object:', error);
+    }
+    // axios.post(`${import.meta.env.VITE_BASE_URL}/generate-trip-plan`, {
+    //   destination,
+    //   dates,
+    //   budget,
+    //   travelStyle,
+    //   preferences
+    // })
+    // .then((response) => {
+    //   console.log('response:', response);
+    //   console.log('response data:', response.data);
+    // })
+    // .catch((error) => {
+    //   console.log('error:', error);
+    //   console.log('error response:', error.response);
+    // });
     console.log({
         destination,
         dates,
