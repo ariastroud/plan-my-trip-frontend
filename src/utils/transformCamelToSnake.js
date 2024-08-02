@@ -1,22 +1,22 @@
 // Transforms the keys with snake_case to camelCase
 const keyMapping = {
-  latitude_destination: "latitudeDestination",
-  longitude_destination: "longitudeDestination",
-  start_date: "startDate",
-  end_date: "endDate",
+  latitudeDestination: "latitude_destination",
+  longitudeDestination: "longitude_destination",
+  startDate: "start_date",
+  endDate: "end_date",
 };
 
-const transformKeys = (obj) => {
+const convertToSnakeCase = (obj) => {
   if (Array.isArray(obj)) {
-    return obj.map(transformKeys);
+    return obj.map(convertToSnakeCase);
   } else if (obj !== null && typeof obj === "object") {
     return Object.keys(obj).reduce((acc, key) => {
       const newKey = keyMapping[key] || key;
-      acc[newKey] = transformKeys(obj[key]);
+      acc[newKey] = convertToSnakeCase(obj[key]);
       return acc;
     }, {});
   }
   return obj;
 };
 
-export default transformKeys;
+export default convertToSnakeCase;

@@ -3,8 +3,9 @@ import Map from "./Map";
 import axios from "axios";
 import { useState } from "react";
 import NavBar from "./NavBar";
+import convertToSnakeCase from "../utils/transformCamelToSnake";
 
-const TravelPlan = ({travelPlansData}) => {
+const TravelPlan = ({travelPlansData, saveTrip}) => {
 
     const [selectedDay, setSelectedDay] = useState(null);
 
@@ -12,15 +13,19 @@ const TravelPlan = ({travelPlansData}) => {
       setSelectedDay((prevSelectedDay) => (prevSelectedDay === day ? null : day));
   };
 
-    const saveTrip = async () => {
-      try {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips`, travelPlansData);
-        console.log(response.data);
-        console.log('response data:', response.data);
-      } catch (error) {
-        console.error('There was an error!', error);
-      }
-    };
+    // const saveTrip = async () => {
+    //   try {
+    //     const travelPlansData = convertToSnakeCase(travelPlansData);
+    //     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips`, travelPlansData);
+    //     console.log(response.data);
+    //     console.log('response data:', response.data);
+
+    //     // reset travelPlansData
+    //     setTravelPlansData(null);
+    //   } catch (error) {
+    //     console.error('There was an error!', error);
+    //   }
+    // };
 
     return (
       <div>
