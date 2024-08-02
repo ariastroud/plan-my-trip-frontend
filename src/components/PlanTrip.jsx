@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
-import NavBar from './NavBar';
-import testTravelPlansData from '../testData';
+import NavBar from '../components/NavBar';
+import axios from "axios";
 
+// const axios = require('axios');
 
 const options = [
     { value: 'adventure', label: 'Adventure' },
@@ -28,36 +29,52 @@ const PlanTrip = ({handleTravelPlansData}) => {
           [ preferences, setPreferences ] = useState('');
 
 
-        const handleDateChange = (newDates) => {
-        console.log("newDates:", newDates);
-        setDates(newDates);
-        }
+    const handleDateChange = (newDates) => {
+    console.log("newDates:", newDates);
+    setDates(newDates);
+    }
 
-    const handleGeneratePlan = () => {
-        event.preventDefault();
+    const handleGeneratePlan = async (e)  => {
+        e.preventDefault();
+        console.log({
+          destination,
+          dates,
+          budget,
+          travelStyle,
+          preferences,
+      });
     // Handle the logic for generating the travel plan
-    fetch('/api/generate-trip-plan', {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    const requestBody = {
       destination,
       dates,
       budget,
       travelStyle,
-      preferences
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Handle the response data
-      console.log(data);
-    })
-    .catch(error => {
-      // Handle the error
-      console.error(error);
-    });
+      preferences};
+    try {
+      //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
+      // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, requestBody,);
+        console.log(response.data);
+
+    } catch (error) {
+        console.error('There was an error!', error.response.data.error);
+        console.error('Error object:', error);
+    }
+    // axios.post(`${import.meta.env.VITE_BASE_URL}/generate-trip-plan`, {
+    //   destination,
+    //   dates,
+    //   budget,
+    //   travelStyle,
+    //   preferences
+    // })
+    // .then((response) => {
+    //   console.log('response:', response);
+    //   console.log('response data:', response.data);
+    // })
+    // .catch((error) => {
+    //   console.log('error:', error);
+    //   console.log('error response:', error.response);
+    // });
     console.log({
         destination,
         dates,
