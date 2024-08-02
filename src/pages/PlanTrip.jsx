@@ -31,16 +31,24 @@ const PlanTrip = () => {
 
     const handleGeneratePlan = async (e)  => {
         e.preventDefault();
+        console.log({
+          destination,
+          dates,
+          budget,
+          travelStyle,
+          preferences,
+      });
     // Handle the logic for generating the travel plan
     const requestBody = {
-      destination: destination,
-      dates: dates,
-      budget: budget,
-      travelStyle: travelStyle,
-      preferences: preferences};
+      destination,
+      dates,
+      budget,
+      travelStyle,
+      preferences};
     try {
-      //`${import.meta.env.VITE_BASE_URL}/trip/generate-trip-plan`
-        const response = await axios.post('https://plan-my-trip-backend-kxq6.onrender.com//trip/generate-trip-plan', requestBody);
+      //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
+      // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, requestBody,);
         console.log(response.data);
 
     } catch (error) {
