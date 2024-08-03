@@ -3,6 +3,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
 import NavBar from '../components/NavBar';
 import axios from "axios";
+import testTravelPlansData from '../testData';
 
 // const axios = require('axios');
 
