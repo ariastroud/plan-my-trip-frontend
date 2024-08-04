@@ -1,8 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import defaultUserProfile from "../assets/images/defaultUserProfile.jpg";
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+
+    localStorage.removeItem('logInData');
+    navigate('/');
+
+  };
+
   return (
     <div className="navbar bg-base-100">
   <div className="navbar-start">
@@ -65,7 +75,7 @@ const NavBar = () => {
           </a>
         </li>
         <li><a><Link to="/travelplan">Saved Trip</Link></a></li>
-        <li><a>Logout</a></li>
+        <li><a onClick={handleLogout}>Logout</a></li>
       </ul>
     </div>
   </div>

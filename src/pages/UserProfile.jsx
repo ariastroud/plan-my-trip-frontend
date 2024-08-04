@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
   const [trips, setTrips] = useState([]);
+  const navigate = useNavigate();
 
   const userId = JSON.parse(localStorage.getItem('logInData')).id;
 
@@ -27,7 +29,10 @@ const UserProfile = () => {
   };
 
   const handleLogout = () => {
-    // Implement logout logic here
+
+    localStorage.removeItem('logInData');
+    navigate('/');
+
   };
 
   return (
