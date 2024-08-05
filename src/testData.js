@@ -7,7 +7,7 @@ const testTravelPlansData = {
   budget: 600,
   itinerary: [
     {
-      day: 1,
+      day_number: 1,
       activities: [
         {
           activity: "Visit Pike Place Market",
@@ -42,7 +42,7 @@ const testTravelPlansData = {
       ],
     },
     {
-      day: 2,
+      day_number: 2,
       activities: [
         {
           activity: "Chihuly Garden and Glass",
@@ -77,7 +77,7 @@ const testTravelPlansData = {
       ],
     },
     {
-      day: 3,
+      day_number: 3,
       activities: [
         {
           activity: "Seattle Aquarium",

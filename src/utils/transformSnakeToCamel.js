@@ -4,6 +4,8 @@ const keyMapping = {
   longitude_destination: "longitudeDestination",
   start_date: "startDate",
   end_date: "endDate",
+  day_number: "dayNumber",
+  places_to_eat: "placesToEat",
 };
 
 const convertToCamelCase = (obj) => {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
-import NavBar from '../components/NavBar';
 import axios from "axios";
 import testTravelPlansData from '../testData';
 
@@ -88,7 +87,6 @@ const PlanTrip = ({handleTravelPlansData}) => {
 
   return (
     <div>
-      <NavBar />
       <div className="card lg:card-side bg-base-100 shadow-xl">
       {/* Testing purposes */}
       <button className="btn btn-primary" onClick={handleClick}>Test Data</button>

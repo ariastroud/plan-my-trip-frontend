@@ -4,6 +4,7 @@ import TravelPlan from '../components/TravelPlan';
 import convertToCamelCase from '../utils/transformSnakeToCamel';
 import convertToSnakeCase from '../utils/transformCamelToSnake';
 import axios from 'axios';
+import NavBar from '../components/NavBar';
 
 const TripManager = () => {
     const userId = JSON.parse(localStorage.getItem('logInData')).id;
@@ -31,6 +32,7 @@ const TripManager = () => {
 
     return (
         <div>
+          <NavBar />
             <div>
                 {(!travelPlansData) ? <PlanTrip handleTravelPlansData={handleTravelPlansData} /> : <TravelPlan travelPlansData={travelPlansData} saveTrip={saveTrip}/>}
             </div>

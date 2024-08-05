@@ -5,7 +5,7 @@ import { useState } from "react";
 import NavBar from "./NavBar";
 import convertToSnakeCase from "../utils/transformCamelToSnake";
 
-const TravelPlan = ({travelPlansData, saveTrip}) => {
+const TravelPlan = ({travelPlansData, backToTrips, saveTrip}) => {
 
     const [selectedDay, setSelectedDay] = useState(null);
 
@@ -29,7 +29,7 @@ const TravelPlan = ({travelPlansData, saveTrip}) => {
 
     return (
       <div>
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="mx-8">
             <h1 className="font-extrabold text-2xl">Travel Plan for {travelPlansData.destination}</h1>
             <p>{travelPlansData.startDate} - {travelPlansData.endDate}</p>
@@ -38,7 +38,7 @@ const TravelPlan = ({travelPlansData, saveTrip}) => {
                 <Itinerary travelPlansData={travelPlansData} handleDayClick={handleDayClick}/>
                 <Map travelPlansData={travelPlansData} selectedDay={selectedDay} />
             </div>
-            <button className="btn btn-secondary" onClick={saveTrip}>Save Trip</button>
+            {backToTrips ? <button className="btn btn-secondary" onClick={backToTrips}>Back to Trips</button> : <button className="btn btn-secondary" onClick={saveTrip}>Save Trip</button>}
         </div>
       </div>
 

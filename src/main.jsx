@@ -5,6 +5,7 @@ import App from './App.jsx';
 import './index.css';
 import UserProfile from './pages/UserProfile.jsx';
 import TripManager from './pages/TripManager.jsx';
+import TravelPlan from './components/TravelPlan.jsx';
 
 const router = createBrowserRouter([
   {

@@ -12,8 +12,8 @@ const Itinerary = ({ travelPlansData, handleDayClick}) => {
             <ol className='text-left'>
                 {itinerary.map((day) => {
                     return (
-                        <li className='p-4' key={day.day}>
-                            <h2 className='font-bold text-lg hover:underline cursor-pointer hover:text-bright-green' onClick={() => handleDayClick(day.day)}>Day {day.day}</h2>
+                        <li className='p-4' key={day.dayNumber}>
+                            <h2 className='font-bold text-lg hover:underline cursor-pointer hover:text-bright-green' onClick={() => handleDayClick(day.dayNumber)}>Day {day.dayNumber}</h2>
                             <ul className="list-disc">
                                 {day.activities.map((activity) => (
                                     <li key={activity.id}>
