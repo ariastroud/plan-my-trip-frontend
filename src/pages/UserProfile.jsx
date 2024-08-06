@@ -5,42 +5,22 @@ import { useNavigate } from 'react-router-dom';
 import TravelPlan from '../components/TravelPlan';
 
 const UserProfile = () => {
-  const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('profile');
   const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
   const [selectedTripData, setSelectedTripData] = useState(null);
 
-  const userId = JSON.parse(localStorage.getItem('logInData')).id;
+  const user = JSON.parse(localStorage.getItem('logInData'));
 
   const getTripsByUser = async (userId) => {
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/${userId}/trips`);
     console.log(response.data);
-    return response.data;
+    setTrips(response.data);
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [userData, tripsData] = await Promise.all([
-          getUser(userId),
-          getTripsByUser(userId)
-        ]);
-        setUser(userData);
-        setTrips(tripsData);
-        console.log('trips:', trips);
-      } catch (error) {
-        console.error('There was an error!', error);
-      }
-    };
-    fetchData();
-  }, [userId, trips]);
-
-  const getUser = async (userId) => {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/${userId}`);
-    console.log(response.data);
-    return response.data.user;
-  };
+    getTripsByUser(user.id);
+  }, [user.id]);
 
   const handleTravelPlanClick = (tripId) => {
     console.log('tripId', tripId);
