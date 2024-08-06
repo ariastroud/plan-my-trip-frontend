@@ -10,6 +10,7 @@ const TripManager = () => {
     const userId = JSON.parse(localStorage.getItem('logInData')).id;
 
     const [travelPlansData, setTravelPlansData] = useState(null);
+    const [savedStatus, setSavedStatus] = useState(null);
 
     const handleTravelPlansData = (data) => {
         const transformedData = convertToCamelCase(data);
@@ -24,7 +25,7 @@ const TripManager = () => {
           console.log(response.data);
           console.log('response data:', response.data);
 
-          setTravelPlansData(null);
+          setSavedStatus('saved');
         } catch (error) {
           console.error('There was an error!', error);
         }
@@ -34,7 +35,7 @@ const TripManager = () => {
         <div>
           <NavBar />
             <div>
-                {(!travelPlansData) ? <PlanTrip handleTravelPlansData={handleTravelPlansData} /> : <TravelPlan travelPlansData={travelPlansData} saveTrip={saveTrip}/>}
+                {(!travelPlansData) ? <PlanTrip handleTravelPlansData={handleTravelPlansData} /> : <TravelPlan travelPlansData={travelPlansData} saveTrip={saveTrip} savedStatus={savedStatus}/>}
             </div>
         </div>
     );
