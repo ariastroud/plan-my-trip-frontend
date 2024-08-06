@@ -39,8 +39,8 @@ const UserProfile = () => {
     const trip = tripData.trip;
     const formattedTripData = {
       destination: trip.destination,
-      latitudeDestination: trip.latitude,
-      longitudeDestination: trip.longitude,
+      latitude: trip.latitude,
+      longitude: trip.longitude,
       startDate: trip.start_date,
       endDate: trip.end_date,
       budget: trip.budget,

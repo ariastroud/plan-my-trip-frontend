@@ -1,11 +1,10 @@
 // Transforms the keys with snake_case to camelCase
 const keyMapping = {
-  latitude_destination: "latitudeDestination",
-  longitude_destination: "longitudeDestination",
   start_date: "startDate",
   end_date: "endDate",
   day_number: "dayNumber",
   places_to_eat: "placesToEat",
+  day: "dayNumber",
 };
 
 const convertToCamelCase = (obj) => {
