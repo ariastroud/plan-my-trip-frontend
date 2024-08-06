@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
 import axios from "axios";
-import testTravelPlansData from '../testData';
 import transformCamelToSnake from '../utils/transformCamelToSnake';
 
 // const options = [
@@ -12,11 +11,7 @@ import transformCamelToSnake from '../utils/transformCamelToSnake';
 //     { value: 'family', label: 'Family' },
 //   ];
 const PlanTrip = ({handleTravelPlansData}) => {
-
-  //testing purposes
-    const handleClick = () => {
-        handleTravelPlansData(testTravelPlansData);
-    };
+  const [loading, setLoading] = useState(false);
 
     const [ destination, setDestination ] = useState(''),
           [ dates, setDates ]             = useState({
@@ -35,8 +30,8 @@ const PlanTrip = ({handleTravelPlansData}) => {
 
     const handleGeneratePlan = async (e)  => {
         e.preventDefault();
+        setLoading(true);
     try {
-      // format request body to how the backend expects it
       const startDate = dates.startDate;
       const endDate = dates.endDate;
 
@@ -52,21 +47,28 @@ const PlanTrip = ({handleTravelPlansData}) => {
       //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
       // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
         const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, formattedRequestBody,);
-        console.log('response', JSON.stringify(response.data, null, 2));
         handleTravelPlansData(response.data);
 
     } catch (error) {
         console.error('There was an error!', error.response.data.error);
         console.error('Error object:', error);
+    } finally {
+        setLoading(false);
     }
     };
 
+    if (loading) {
+        return <div>
+          <div className="flex justify-center items-center h-screen">
+            <div className="loading loading-spinner loading-lg text-secondary"></div>
+            <p className="ml-4 text-lg">Generating your trip plan. Please wait a moment...</p>
+          </div>
+        </div>;
+    }
 
   return (
     <div>
       <div className="card lg:card-side bg-base-100 shadow-xl">
-      {/* Testing purposes */}
-      <button className="btn btn-primary" onClick={handleClick}>Test Data</button>
     <figure className="px-10 pt-10">
         <img
         src={planTrip}
