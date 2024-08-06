@@ -3,15 +3,14 @@ import Datepicker from "react-tailwindcss-datepicker";
 import planTrip from "../assets/images/planTrip.jpg";
 import axios from "axios";
 import testTravelPlansData from '../testData';
+import transformCamelToSnake from '../utils/transformCamelToSnake';
 
-// const axios = require('axios');
-
-const options = [
-    { value: 'adventure', label: 'Adventure' },
-    { value: 'relaxation', label: 'Relaxation' },
-    { value: 'sightseeing', label: 'Sightseeing' },
-    { value: 'family', label: 'Family' },
-  ];
+// const options = [
+//     { value: 'adventure', label: 'Adventure' },
+//     { value: 'relaxation', label: 'Relaxation' },
+//     { value: 'sightseeing', label: 'Sightseeing' },
+//     { value: 'family', label: 'Family' },
+//   ];
 const PlanTrip = ({handleTravelPlansData}) => {
 
   //testing purposes
@@ -24,64 +23,42 @@ const PlanTrip = ({handleTravelPlansData}) => {
             startDate: null,
             endDate: null
             }),
-          [ budget, setBudget ]           = useState(''),
-          [ travelStyle, setTravelStyle ] = useState(''),
-          [ preferences, setPreferences ] = useState('');
+          [ budget, setBudget ]           = useState('');
+          // [ travelStyle, setTravelStyle ] = useState(''),
+          // [ preferences, setPreferences ] = useState('');
 
 
     const handleDateChange = (newDates) => {
     console.log("newDates:", newDates);
     setDates(newDates);
-    }
+    };
 
     const handleGeneratePlan = async (e)  => {
         e.preventDefault();
-        console.log({
-          destination,
-          dates,
-          budget,
-          travelStyle,
-          preferences,
-      });
-    // Handle the logic for generating the travel plan
-    const requestBody = {
-      destination,
-      dates,
-      budget,
-      travelStyle,
-      preferences};
     try {
+      // format request body to how the backend expects it
+      const startDate = dates.startDate;
+      const endDate = dates.endDate;
+
+      const requestBody = {
+        destination,
+        startDate,
+        endDate,
+        budget
+      };
+
+      const formattedRequestBody = transformCamelToSnake(requestBody);
+
       //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
       // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, requestBody,);
-        console.log(response.data);
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, formattedRequestBody,);
+        console.log('response', JSON.stringify(response.data, null, 2));
+        handleTravelPlansData(response.data);
 
     } catch (error) {
         console.error('There was an error!', error.response.data.error);
         console.error('Error object:', error);
     }
-    // axios.post(`${import.meta.env.VITE_BASE_URL}/generate-trip-plan`, {
-    //   destination,
-    //   dates,
-    //   budget,
-    //   travelStyle,
-    //   preferences
-    // })
-    // .then((response) => {
-    //   console.log('response:', response);
-    //   console.log('response data:', response.data);
-    // })
-    // .catch((error) => {
-    //   console.log('error:', error);
-    //   console.log('error response:', error.response);
-    // });
-    console.log({
-        destination,
-        dates,
-        budget,
-        travelStyle,
-        preferences,
-    });
     };
 
 
@@ -96,7 +73,6 @@ const PlanTrip = ({handleTravelPlansData}) => {
         alt="Views"
         className="rounded-xl" />
     </figure>
-      {/* Your component content goes here */}
       <div className="card-body items-center text-center">
         <h2 className="card-title">Plan Your Trip</h2>
         <div className="card-body">
@@ -129,7 +105,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
                value={budget}
                onChange={(e) => setBudget(e.target.value)}/>
       </label>
-
+{/* 
     <label className="input input-bordered flex items-center gap-2">
         Travel Style:
         <select
@@ -144,9 +120,9 @@ const PlanTrip = ({handleTravelPlansData}) => {
                 </option>
             ))}
         </select>
-    </label>
+    </label> */}
 
-    <label className="input input-bordered flex items-center gap-2">
+    {/* <label className="input input-bordered flex items-center gap-2">
       Travel Preferences:
         <input type="text"
                className="grow"
@@ -154,7 +130,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
                value={preferences}
                onChange={(e) => setPreferences(e.target.value)}/>
         <span className="badge badge-info">Optional</span>
-      </label>
+      </label> */}
 
       <div className="divider"></div>
 
