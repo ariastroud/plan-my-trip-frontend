@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PlanTrip from '../components/PlanTrip';
 import TravelPlan from '../components/TravelPlan';
 import convertToCamelCase from '../utils/transformSnakeToCamel';
 import convertToSnakeCase from '../utils/transformCamelToSnake';
 import axios from 'axios';
 import NavBar from '../components/NavBar';
+import { useLocation } from 'react-router-dom';
 
 const TripManager = () => {
+    const location = useLocation();
     const userId = JSON.parse(localStorage.getItem('logInData')).id;
 
     const [travelPlansData, setTravelPlansData] = useState(null);
@@ -30,6 +32,10 @@ const TripManager = () => {
           console.error('There was an error!', error);
         }
       };
+
+    useEffect(() => {
+      setTravelPlansData(null);
+    }, [location.pathname, location.search]);
 
     return (
         <div>
