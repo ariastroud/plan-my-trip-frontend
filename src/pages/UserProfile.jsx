@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import TravelPlan from '../components/TravelPlan';
 
 const UserProfile = () => {
+  const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('profile');
   const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
@@ -15,20 +16,30 @@ const UserProfile = () => {
   const getTripsByUser = async (userId) => {
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/${userId}/trips`);
     console.log(response.data);
-    setTrips(response.data);
+    return response.data;
   };
 
   useEffect(() => {
-    const getTrips = async () => {
-      await getTripsByUser(userId);
+    const fetchData = async () => {
+      try {
+        const [userData, tripsData] = await Promise.all([
+          getUser(userId),
+          getTripsByUser(userId)
+        ]);
+        setUser(userData);
+        setTrips(tripsData);
+        console.log('trips:', trips);
+      } catch (error) {
+        console.error('There was an error!', error);
+      }
     };
-    getTrips();
-  }, [userId]);
+    fetchData();
+  }, [userId, trips]);
 
-  const user = {
-    name: 'John Doe',
-    userId: '123456',
-    email: 'johndoe@example.com',
+  const getUser = async (userId) => {
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/${userId}`);
+    console.log(response.data);
+    return response.data.user;
   };
 
   const handleTravelPlanClick = (tripId) => {
@@ -126,8 +137,7 @@ const UserProfile = () => {
                 <div>
                   <h1 className="text-5xl font-bold">Hi, Traveler!</h1>
                   <p className="py-6">
-                    <h2>{user.name}</h2>
-                    <p>User ID: {user.userId}</p>
+                    <p>Username: {user.username}</p>
                     <p>Email: {user.email}</p>
                   </p>
                   <button
