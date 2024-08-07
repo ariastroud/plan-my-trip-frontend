@@ -35,7 +35,7 @@ const NavBar = () => {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl text-primary">PlanMyTrip</a>
+        <a className="btn btn-ghost text-2xl text-primary">PlanMyTrip</a>
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
@@ -51,7 +51,7 @@ const NavBar = () => {
               <Link to="/userprofile?tab=profile">Profile</Link>
             </li>
             <li>
-              <Link to="/userprofile?tab=trips">Saved Trip</Link>
+              <Link to="/userprofile?tab=trips">Saved Trips</Link>
             </li>
             <li>
               <a onClick={handleLogout}>Logout</a>

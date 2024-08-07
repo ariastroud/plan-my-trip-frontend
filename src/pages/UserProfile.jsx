@@ -30,7 +30,7 @@ const UserProfile = () => {
   return (
     <>
       <NavBar />
-      <div role="tablist" className="tabs tabs-lifted">
+      <div role="tablist" className="tabs tabs-lifted pt-5">
         <input
           type="radio"
           name="my_tabs_2"

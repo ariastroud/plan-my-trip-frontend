@@ -79,24 +79,22 @@ const SavedTrips = ({ userId }) => {
         <TravelPlan travelPlansData={selectedTripData} backToTrips={backToTrips} />
       ) : (
         <div className="tab-content bg-base-100 border-base-300 rounded-box p-6">
+          <div className="grid grid-cols-1 gap-8 w-1/2 m-auto">
           {trips.map((trip) => (
             <div key={trip.id}>
-              <div className="card bg-base-100 w-96 shadow-xl">
+              <div className="card bg-base-100 shadow-xl hover:bg-primary hover:cursor-pointer border border-base-300" onClick={() => handleTravelPlanClick(trip.id)}>
                 <div className="card-body">
-                  <h2 className="card-title">{trip.destination}</h2>
+                  <h2 className="card-title hover:underline">{trip.destination}</h2>
                   <p>
                     Dates: {trip.start_date} to {trip.end_date}
                   </p>
                   <p>Budget: ${trip.budget}</p>
                   <div className="card-actions justify-end">
                     <button
-                      onClick={() => handleTravelPlanClick(trip.id)}
-                      className="btn btn-primary"
-                    >
-                      See travel plan
-                    </button>
-                    <button
-                      onClick={() => handleDeleteTrip(trip.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteTrip(trip.id);
+                      }}
                       className="btn btn-danger"
                     >
                       Delete
@@ -106,6 +104,7 @@ const SavedTrips = ({ userId }) => {
               </div>
             </div>
           ))}
+          </div>
         </div>
       )}
     </>

@@ -1,8 +1,11 @@
 import Itinerary from "./Itinerary";
 import Map from "./Map";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
     const [selectedDay, setSelectedDay] = useState(null);
 
