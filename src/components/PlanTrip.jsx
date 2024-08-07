@@ -12,25 +12,44 @@ import transformCamelToSnake from '../utils/transformCamelToSnake';
 //   ];
 const PlanTrip = ({handleTravelPlansData}) => {
   const [loading, setLoading] = useState(false);
+  const [ destination, setDestination ] = useState(''),
+        [ dates, setDates ]             = useState({
+          startDate: null,
+          endDate: null
+          }),
+        [ budget, setBudget ]           = useState('');
+        // [ travelStyle, setTravelStyle ] = useState(''),
+        // [ preferences, setPreferences ] = useState('');
 
-    const [ destination, setDestination ] = useState(''),
-          [ dates, setDates ]             = useState({
-            startDate: null,
-            endDate: null
-            }),
-          [ budget, setBudget ]           = useState('');
-          // [ travelStyle, setTravelStyle ] = useState(''),
-          // [ preferences, setPreferences ] = useState('');
 
-
-    const handleDateChange = (newDates) => {
+  const handleDateChange = (newDates) => {
     console.log("newDates:", newDates);
+    const today = new Date();
+    console.log("today",today)
     setDates(newDates);
-    };
+  };
+
+
+  const isValidBudget = (budget) => {
+    const budgetNumber = parseFloat(budget);
+    return !isNaN(budgetNumber) && budgetNumber >= 0;
+  };
+
+  const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()+1).padStart(2, '0');
+    console.log(`${year}-${month}-${day}`)
+    return `${year}-${month}-${day}`;
+  };
 
     const handleGeneratePlan = async (e)  => {
-        e.preventDefault();
-        setLoading(true);
+      if (!isValidBudget(budget)) {
+        alert("Please enter a valid budget that is a non-negative number.");
+        return;
+      }
+      setLoading(true);
     try {
       const startDate = dates.startDate;
       const endDate = dates.endDate;
@@ -94,6 +113,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
             value={dates}
             onChange={handleDateChange}
             showShortcuts={false}
+            minDate={new Date(getTodayDate())}
             />
       </label>
 
