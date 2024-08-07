@@ -64,6 +64,15 @@ const SavedTrips = ({ userId }) => {
     setSelectedTripData(null);
   };
 
+  const handleDeleteTrip = async (tripId) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}/trips/${tripId}`);
+      setTrips(trips.filter(trip => trip.id !== tripId));
+    } catch (error) {
+      console.error("Error deleting trip:", error);
+    }
+  };
+
   return (
     <>
       {selectedTripData ? (
@@ -85,6 +94,12 @@ const SavedTrips = ({ userId }) => {
                       className="btn btn-secondary"
                     >
                       See travel plan
+                    </button>
+                    <button
+                      onClick={() => handleDeleteTrip(trip.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
                     </button>
                   </div>
                 </div>
