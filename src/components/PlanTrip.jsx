@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
 import axios from "axios";
 import transformCamelToSnake from '../utils/transformCamelToSnake';
+import SearchDestination from './SearchDestination';
 
 // const options = [
 //     { value: 'adventure', label: 'Adventure' },
@@ -44,6 +45,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
   };
 
     const handleGeneratePlan = async (e)  => {
+      e.preventDefault();
       if (!isValidBudget(budget)) {
         alert("Please enter a valid budget that is a non-negative number.");
         return;
@@ -61,6 +63,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
       };
 
       const formattedRequestBody = transformCamelToSnake(requestBody);
+      console.log("formattedRequestBody:", formattedRequestBody);
 
       //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
       // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
@@ -89,6 +92,11 @@ const PlanTrip = ({handleTravelPlansData}) => {
         </div>;
     }
 
+    const handleSelectedLocation = (location) => {
+      console.log(location)
+      setDestination(location.display_name);
+    }; 
+
   return (
     <div className="grid grid-cols-2 h-screen">
       <div className="flex flex-col pl-24 pt-10">
@@ -100,15 +108,9 @@ const PlanTrip = ({handleTravelPlansData}) => {
         </p>
         <form>
           <p className="text-2xl font-bold mb-4 font-spaceMono">Where do you want to go?</p>
-          <label className="input input-bordered flex items-center gap-2">
-            <input
-              type="text"
-              className="grow"
-              placeholder="Destination"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-            />
-          </label>
+          <SearchDestination handleSelectedLocation={handleSelectedLocation} />
+          <div>
+            </div>
           <p className="text-2xl font-bold mb-4 mt-6 font-spaceMono">When do you want to go?</p>
           <label className="input input-bordered flex items-center gap-2">
             <Datepicker

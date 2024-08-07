@@ -35,6 +35,7 @@ const TripManager = () => {
 
     useEffect(() => {
       setTravelPlansData(null);
+      setSavedStatus(null);
     }, [location.pathname, location.search]);
 
     return (
