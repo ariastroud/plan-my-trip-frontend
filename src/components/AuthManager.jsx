@@ -86,7 +86,7 @@ const AuthManager = () => {
 
     return (
         <div>
-            <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>Let&apos;s go! ✈️</button>
+            <button className="btn btn-outline border-light-gray text-light-gray py-2 px-4 rounded-lg h-auto btn-sm hover:border-light-gray hover:bg-bright-green" onClick={()=>document.getElementById('my_modal_3').showModal()}>log in / sign up</button>
             <dialog id="my_modal_3" className="modal">
             <div className="modal-box">
                 <form method="dialog">

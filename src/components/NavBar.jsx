@@ -36,7 +36,7 @@ const NavBar = () => {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Plan My Trip</a>
+        <a className="btn btn-ghost text-xl">PlanMyTrip</a>
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
