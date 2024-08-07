@@ -5,12 +5,12 @@ const LogIn = ({ toggleLogInSignUp, logInError, formFields, handleChange, handle
     return (
         <div>
             <div className="grid grid-cols-1 mx-11">
-                <h3 className="font-bold text-lg text-black text-center -mb-4">Log in</h3>
+                <h3 className="font-bold text-lg text-black text-center -mb-4 font-spaceMono">Log in</h3>
                 <div className="divider"></div>
                 <h3 className="font-bold text-lg text-black text-left">Welcome!</h3>
                 <div className="flex items-center">
                     <p className="text-black text-left mb-0 text-base"> New to PlanMyTrip?</p>
-                    <button className="btn btn-link no-underline hover:underline -ml-3 text-base text-secondary on" onClick={() => toggleLogInSignUp('signup')}>Sign up</button>
+                    <button className="font-spaceMono btn btn-link no-underline hover:underline -ml-3 text-base text-primary on" onClick={() => toggleLogInSignUp('signup')}>Sign up</button>
                 </div>
                 <form data-testid="login-form" className="grid grid-cols-1 gap-2" onSubmit={handleSubmit}>
                     <label className="input input-bordered flex items-center gap-2 text-black">
@@ -35,7 +35,7 @@ const LogIn = ({ toggleLogInSignUp, logInError, formFields, handleChange, handle
                     onChange={handleChange}
                     />
                     </label>
-                    <button type="submit" className="btn btn-secondary mt-4">Log in</button>
+                    <button type="submit" className="btn btn-primary mt-4">Log in</button>
                 </form>
                 {logInError ? <div className="text-red-500 text-sm">{logInError}</div> : null}
             </div>

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Datepicker from "react-tailwindcss-datepicker";
-import planTrip from "../assets/images/planTrip.jpg";
 import axios from "axios";
 import transformCamelToSnake from '../utils/transformCamelToSnake';
 
@@ -79,94 +78,66 @@ const PlanTrip = ({handleTravelPlansData}) => {
     if (loading) {
         return <div>
           <div className="flex justify-center items-center h-screen">
-            <div className="loading loading-spinner loading-lg text-secondary"></div>
-            <p className="ml-4 text-lg">Generating your trip plan. Please wait a moment...</p>
+            <div className="loading loading-spinner loading-lg text-primary"></div>
+            <p className="ml-4 text-lg">Generating your trip plan. Please wait a moment...
+              <br />
+                <small className="text-gray-500">
+                  * Note: The AI-generated plan may not always be accurate or up-to-date. Please verify details before making any travel arrangements.
+                </small>
+            </p>
           </div>
         </div>;
     }
 
   return (
-    <div>
-      <div className="card lg:card-side bg-base-100 shadow-xl">
-    <figure className="px-10 pt-10">
-        <img
-        src={planTrip}
-        alt="Views"
-        className="rounded-xl" />
-    </figure>
-      <div className="card-body items-center text-center">
-        <h2 className="card-title">Plan Your Trip</h2>
-        <div className="card-body">
-      <form>
-      <label className="input input-bordered flex items-center gap-2">
-      Destination:
-        <input type="text"
-               className="grow"
-               placeholder="Where do you want to go?"
-               value={destination}
-               onChange={(e) => setDestination(e.target.value)}/>
-      </label>
-
-      <label className="input input-bordered flex items-center gap-2">
-      Dates:
-      <Datepicker
-            value={dates}
-            onChange={handleDateChange}
-            showShortcuts={false}
-            minDate={new Date(getTodayDate())}
+    <div className="grid grid-cols-2 h-screen">
+      <div className="flex flex-col pl-24 pt-10">
+        <h1 className="font-spaceMono font-bold text-6xl text-left mb-4">Plan Your Trip</h1>
+      </div>
+      <div className="flex flex-col pt-10 pr-36">
+        <p className="text-lg text-left pb-10">
+          Ready for an adventure? ✈️ Answer a few quick questions, and let our AI magic work to craft the perfect trip itinerary just for you! 🌍✨ From stunning sights to hidden gems, we’ve got you covered. Just tell us what you’re dreaming of, and watch as your dream trip takes shape. Let’s turn those travel dreams into reality!
+        </p>
+        <form>
+          <p className="text-2xl font-bold mb-4 font-spaceMono">Where do you want to go?</p>
+          <label className="input input-bordered flex items-center gap-2">
+            <input
+              type="text"
+              className="grow"
+              placeholder="Destination"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
             />
-      </label>
-
-
-
-      <label className="input input-bordered flex items-center gap-2">
-      Budget:
-        <input type="text"
-               className="grow"
-               placeholder="$USD"
-               value={budget}
-               onChange={(e) => setBudget(e.target.value)}/>
-      </label>
-{/*
-    <label className="input input-bordered flex items-center gap-2">
-        Travel Style:
-        <select
-            className="select-sm w-full max-w-xs"
-            value={travelStyle}
-            onChange={(e) => setTravelStyle(e.target.value)}
-        >
-            <option disabled selected>Pick your travel style!</option>
-            {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                    {option.label}
-                </option>
-            ))}
-        </select>
-    </label> */}
-
-    {/* <label className="input input-bordered flex items-center gap-2">
-      Travel Preferences:
-        <input type="text"
-               className="grow"
-               placeholder="More sightseeing!"
-               value={preferences}
-               onChange={(e) => setPreferences(e.target.value)}/>
-        <span className="badge badge-info">Optional</span>
-      </label> */}
-
-      <div className="divider"></div>
-
-        <button className="btn btn-primary"
-                type="submit"
-                onClick={handleGeneratePlan}>Generate Travel Plan</button>
-
-      </form>
-      </div>
+          </label>
+          <p className="text-2xl font-bold mb-4 mt-6 font-spaceMono">When do you want to go?</p>
+          <label className="input input-bordered flex items-center gap-2">
+            <Datepicker
+              value={dates}
+              onChange={handleDateChange}
+              showShortcuts={false}
+            />
+          </label>
+          <p className="text-2xl font-bold mb-4 mt-6 font-spaceMono">What is your budget?</p>
+          <label className="input input-bordered flex items-center gap-2">
+            <input
+              type="text"
+              className="grow"
+              placeholder="$USD"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+            />
+          </label>
+          <div className="divider"></div>
+          <button
+            className="btn btn-primary font-spaceMono"
+            type="submit"
+            onClick={handleGeneratePlan}
+          >
+            Generate Travel Plan
+          </button>
+        </form>
       </div>
     </div>
-
-    </div>
-
   );
 };
 

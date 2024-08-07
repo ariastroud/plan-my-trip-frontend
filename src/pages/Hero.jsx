@@ -10,7 +10,7 @@ return (
         <h1 className="text-12xl font-bold font-custom text-bright-green">
             PlanMyTrip
         </h1>
-        <p className="text-lg text-neutral-content text-left pl-4 mb-4 -mt-12 w-1/2 font-spaceMono">
+        <p className="text-lg text-light-gray text-left pl-4 mb-4 -mt-12 w-1/2 font-spaceMono">
         Plan your getaway with ease—PlanMyTrip uses AI to craft custom travel itineraries tailored to your budget for unforgettable adventures!
         </p>
         <div className="absolute top-8 right-8">

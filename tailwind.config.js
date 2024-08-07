@@ -12,6 +12,7 @@ export default {
       fontFamily: {
         custom: ["Coconat", "sans-serif"],
         spaceMono: ["Space Mono", "monospace"],
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         "bright-green": "#BADA55",
@@ -23,4 +24,25 @@ export default {
     },
   },
   plugins: [daisyui],
+
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: "#9CB8D3",
+          secondary: "#ff00ff",
+          accent: "#00ffff",
+          neutral: "#ff00ff",
+          "neutral-content": "#160016",
+          "base-100": "#ffffff",
+          "base-200": "#dedede",
+          "base-300": "#bebebe",
+          info: "#0000ff",
+          success: "#00ff00",
+          warning: "#00ff00",
+          error: "#ff0000",
+        },
+      },
+    ],
+  },
 };

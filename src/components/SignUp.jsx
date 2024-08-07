@@ -5,12 +5,12 @@ const SignUp = ({toggleLogInSignUp, logInError, formFields, handleChange, handle
     return (
         <div>
             <div className="grid grid-cols-1 mx-11">
-                <h3 className="font-bold text-lg text-black text-center -mb-4">Sign up</h3>
+                <h3 className="font-bold text-lg text-black text-center -mb-4 font-spaceMono">Sign up</h3>
                 <div className="divider"></div>
                 <h3 className="font-bold text-lg text-black text-left">Join PlanMyTrip!</h3>
                 <div className="flex items-center">
                     <p className="text-black text-left mb-0 text-base"> Already have an account?</p>
-                    <button className="btn btn-link no-underline hover:underline -ml-3 text-base text-secondary on" onClick={() => toggleLogInSignUp('login')}>Log in</button>
+                    <button className="font-spaceMono btn btn-link no-underline hover:underline -ml-3 text-base text-primary on" onClick={() => toggleLogInSignUp('login')}>Log in</button>
                 </div>
                 <form data-testid="signup-form" className="grid grid-cols-1 gap-2" onSubmit={handleSubmit}>
                     <label className="input input-bordered flex items-center gap-2 text-black">
@@ -47,7 +47,7 @@ const SignUp = ({toggleLogInSignUp, logInError, formFields, handleChange, handle
                         />
                     </label>
                     <p className='text-sm text-black'>Password must be at least 8 characters long, contain at least one uppercase letter and must contain at least one digit.</p>
-                    <button type="submit" className="btn btn-secondary mt-4">Sign up</button>
+                    <button type="submit" className="btn btn-primary mt-4">Sign up</button>
                 </form>
                 {logInError ? <div className="text-red-500 text-sm">{logInError}</div> : null}
             </div>

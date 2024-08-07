@@ -13,7 +13,7 @@ const Itinerary = ({ travelPlansData, handleDayClick}) => {
                 {itinerary.map((day) => {
                     return (
                         <li className='p-4' key={day.dayNumber}>
-                            <h2 className='font-bold text-lg hover:underline cursor-pointer hover:text-bright-green' onClick={() => handleDayClick(day.dayNumber)}>Day {day.dayNumber}</h2>
+                            <h2 className='font-bold text-lg hover:underline cursor-pointer hover:text-bright-green font-spaceMono' onClick={() => handleDayClick(day.dayNumber)}>Day {day.dayNumber}</h2>
                             <ul className="list-disc">
                                 {day.activities.map((activity) => (
                                     <li key={activity.id}>

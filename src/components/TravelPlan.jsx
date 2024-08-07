@@ -13,16 +13,16 @@ const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
     return (
       <div>
         <div className="mx-8">
-            <h1 className="font-extrabold text-2xl">Travel Plan for {travelPlansData.destination}</h1>
-            <p>{travelPlansData.startDate} - {travelPlansData.endDate}</p>
-            <p className="">Budget: ${travelPlansData.budget}</p>
+            <h1 className="font-extrabold text-2xl text-center font-spaceMono pt-5">Travel Plan for {travelPlansData.destination}</h1>
+            <p className="text-center">{travelPlansData.startDate} - {travelPlansData.endDate}</p>
+            <p className="text-center">Budget: ${travelPlansData.budget}</p>
             <div className="pb-2 text-left">
               {backToTrips ? 
               <button 
-                className="btn btn-secondary" 
+                className="btn btn-primary" 
                 onClick={backToTrips}>Back to Trips</button> 
               : <button 
-                className="btn btn-secondary" 
+                className="btn btn-primary" 
                 onClick={saveTrip}>
                   {savedStatus === 'saved' ? '♥ Trip Saved' : '♡ Save Trip'}
                   </button>}

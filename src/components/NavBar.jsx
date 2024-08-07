@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import defaultUserProfile from "../assets/images/defaultUserProfile.jpg";
 
@@ -11,7 +10,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 border border-base-300">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -36,7 +35,7 @@ const NavBar = () => {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">PlanMyTrip</a>
+        <a className="btn btn-ghost text-xl text-primary">PlanMyTrip</a>
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">

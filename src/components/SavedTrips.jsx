@@ -91,7 +91,7 @@ const SavedTrips = ({ userId }) => {
                   <div className="card-actions justify-end">
                     <button
                       onClick={() => handleTravelPlanClick(trip.id)}
-                      className="btn btn-secondary"
+                      className="btn btn-primary"
                     >
                       See travel plan
                     </button>
