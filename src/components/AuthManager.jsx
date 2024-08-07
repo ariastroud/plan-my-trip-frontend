@@ -25,11 +25,7 @@ const AuthManager = () => {
         }
     };
 
-    const [logInUserData, setLogInUserData] = useState(
-        localStorage.getItem("logInData")
-        ? JSON.parse(localStorage.getItem("logInData"))
-        : null
-    );
+    const [logInUserData, setLogInUserData] = useState(null);
 
     const [logInError, setLogInError] = useState(null);
 
