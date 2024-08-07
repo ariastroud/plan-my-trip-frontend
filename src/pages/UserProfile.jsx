@@ -1,113 +1,50 @@
 import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import TravelPlan from '../components/TravelPlan';
+import SavedTrips from '../components/SavedTrips';
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState('profile');
-  const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
-  const [selectedTripData, setSelectedTripData] = useState(null);
-
+  const location = useLocation();
   const user = JSON.parse(localStorage.getItem('logInData'));
 
-  const getTripsByUser = async (userId) => {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/${userId}/trips`);
-    console.log(response.data);
-    setTrips(response.data);
-  };
-
   useEffect(() => {
-    getTripsByUser(user.id);
-  }, [user.id]);
-
-  const handleTravelPlanClick = (tripId) => {
-    console.log('tripId', tripId);
-    getTravelPlan(tripId);
-  };
-
-  const getTravelPlan = async (tripId) => {
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/trips/${tripId}`);
-    const tripData = response.data;
-    const formattedTripData = convertTravelData(tripData);
-
-    setSelectedTripData(formattedTripData);
-  };
-
-  const convertTravelData = (tripData) => {
-    const trip = tripData.trip;
-    const formattedTripData = {
-      destination: trip.destination,
-      latitude: trip.latitude,
-      longitude: trip.longitude,
-      startDate: trip.start_date,
-      endDate: trip.end_date,
-      budget: trip.budget,
-      itinerary: []
-    };
-
-    trip.itineraries.forEach((itinerary) => {
-      itinerary.days.forEach((day) => {
-        const formattedItinerary = {
-          dayNumber: day.day_number,
-          activities: day.activities.map((activity) => ({
-            activity: activity.activity,
-            latitude: activity.latitude,
-            longitude: activity.longitude,
-            description: activity.description
-          })),
-          placesToEat: day.places_to_eat.map((place) => ({
-            place: place.place,
-            latitude: place.latitude,
-            longitude: place.longitude,
-            description: place.description
-          }))
-        };
-        formattedTripData.itinerary.push(formattedItinerary);
-      });
-    });
-    return formattedTripData;
-  };
-
-  const backToTrips = () => {
-    setSelectedTripData(null);
-    setActiveTab('trips');
-  };
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, [location]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    navigate(`/userprofile?tab=${tab}`);
   };
 
   const handleLogout = () => {
-
     localStorage.removeItem('logInData');
     navigate('/');
-
   };
 
   return (
     <>
       <NavBar />
-
-      {selectedTripData ? (
-        <TravelPlan travelPlansData={selectedTripData} backToTrips={backToTrips} />
-      ) : (
-        <div role="tablist" className="tabs tabs-lifted">
-          <input
-            type="radio"
-            name="my_tabs_2"
-            role="tab"
-            className="tab"
-            aria-label="User Profile"
-            checked={activeTab === 'profile'}
-            onChange={() => handleTabChange('profile')}
-          />
-
-          <div
-            role="tabpanel"
-            className="tab-content bg-base-100 border-base-300 rounded-box p-6"
-          >
+      <div role="tablist" className="tabs tabs-lifted">
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          className="tab"
+          aria-label="User Profile"
+          checked={activeTab === 'profile'}
+          onChange={() => handleTabChange('profile')}
+        />
+        <div
+          role="tabpanel"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+        >
+          {activeTab === 'profile' && (
             <div className="hero bg-base-200 min-h-screen">
               <div className="hero-content flex-col lg:flex-row">
                 <img
@@ -120,56 +57,26 @@ const UserProfile = () => {
                     <p>Username: {user.username}</p>
                     <p>Email: {user.email}</p>
                   </p>
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleLogout}
-                  >
+                  <button className="btn btn-primary" onClick={handleLogout}>
                     Sign Out
                   </button>
                 </div>
               </div>
             </div>
-          </div>
-
-          <input
-            type="radio"
-            name="my_tabs_2"
-            role="tab"
-            className="tab"
-            aria-label="Saved Trips"
-            checked={activeTab === 'trips'}
-            onChange={() => handleTabChange('trips')}
-          />
-          <div
-            role="tabpanel"
-            className="tab-content bg-base-100 border-base-300 rounded-box p-6"
-          >
-            {trips.map((trip) => {
-              return (
-                <div key={trip.id}>
-                  <div className="card bg-base-100 w-96 shadow-xl">
-                    <div className="card-body">
-                      <h2 className="card-title">{trip.destination}</h2>
-                      <p>
-                        Dates: {trip.start_date} to {trip.end_date}
-                      </p>
-                      <p>Budget: ${trip.budget}</p>
-                      <div className="card-actions justify-end">
-                        <button
-                          onClick={() => handleTravelPlanClick(trip.id)}
-                          className="btn btn-secondary"
-                        >
-                          See travel plan
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          )}
         </div>
-      )}
+
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          className="tab"
+          aria-label="Saved Trips"
+          checked={activeTab === 'trips'}
+          onChange={() => handleTabChange('trips')}
+        />
+        {activeTab === 'trips' && <SavedTrips userId={user.id} />}
+      </div>
     </>
   );
 };

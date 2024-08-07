@@ -46,7 +46,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
 
       //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
       // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
-        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, formattedRequestBody,);
+        const response = await axios.post('https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan', formattedRequestBody,);
         handleTravelPlansData(response.data);
 
     } catch (error) {
@@ -107,7 +107,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
                value={budget}
                onChange={(e) => setBudget(e.target.value)}/>
       </label>
-{/* 
+{/*
     <label className="input input-bordered flex items-center gap-2">
         Travel Style:
         <select
