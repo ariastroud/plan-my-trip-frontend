@@ -46,11 +46,24 @@ const PlanTrip = ({handleTravelPlansData}) => {
 
     const handleGeneratePlan = async (e)  => {
       e.preventDefault();
+
+      if (!destination || !dates.startDate || !dates.endDate || !budget) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
       if (!isValidBudget(budget)) {
         alert("Please enter a valid budget that is a non-negative number.");
         return;
       }
+
       setLoading(true);
+
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+        alert('The request is taking too long. Please try again.');
+      }, 60000);
+
     try {
       const startDate = dates.startDate;
       const endDate = dates.endDate;
@@ -68,9 +81,11 @@ const PlanTrip = ({handleTravelPlansData}) => {
       //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
       // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
         const response = await axios.post('https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan', formattedRequestBody,);
+        clearTimeout(timeoutId);
         handleTravelPlansData(response.data);
 
     } catch (error) {
+        clearTimeout(timeoutId);
         console.error('There was an error!', error.response.data.error);
         console.error('Error object:', error);
     } finally {
