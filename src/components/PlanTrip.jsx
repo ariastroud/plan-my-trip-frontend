@@ -95,7 +95,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
     const handleSelectedLocation = (location) => {
       console.log(location)
       setDestination(location.display_name);
-    }; 
+    };
 
   return (
     <div className="grid grid-cols-2 h-screen">
@@ -117,6 +117,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
               value={dates}
               onChange={handleDateChange}
               showShortcuts={false}
+              minDate={new Date(getTodayDate())}
             />
           </label>
           <p className="text-2xl font-bold mb-4 mt-6 font-spaceMono">What is your budget?</p>
