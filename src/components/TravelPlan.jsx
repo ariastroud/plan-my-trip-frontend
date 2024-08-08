@@ -12,20 +12,31 @@ const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
     const handleDayClick = (day) => {
       setSelectedDay((prevSelectedDay) => (prevSelectedDay === day ? null : day));
   };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const startDate = formatDate(travelPlansData.startDate);
+  const endDate = formatDate(travelPlansData.endDate);
+
 
     return (
       <div>
         <div className="mx-8">
             <h1 className="font-extrabold text-2xl text-center font-spaceMono pt-5">Travel Plan for {travelPlansData.destination}</h1>
-            <p className="text-center">{travelPlansData.startDate} - {travelPlansData.endDate}</p>
+            <p className="text-center">{startDate} - {endDate}</p>
             <p className="text-center">Budget: ${travelPlansData.budget}</p>
             <div className="pb-2 text-left">
-              {backToTrips ? 
-              <button 
-                className="btn btn-primary" 
-                onClick={backToTrips}>Back to Trips</button> 
-              : <button 
-                className="btn btn-primary" 
+              {backToTrips ?
+              <button
+                className="btn btn-primary"
+                onClick={backToTrips}>Back to Trips</button>
+              : <button
+                className="btn btn-primary"
                 onClick={saveTrip}>
                   {savedStatus === 'saved' ? '♥ Trip Saved' : '♡ Save Trip'}
                   </button>}
