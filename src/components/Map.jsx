@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 const Map = ({ travelPlansData, selectedDay }) => {
-    const { itinerary, latitude, longitude } = travelPlansData;
+    const { itinerary, latitude, longitude, placeToRest } = travelPlansData;
 
     if (!itinerary || itinerary.length === 0 || !latitude || !longitude) {
         return <div>An error occurred! Missing data.</div>;
@@ -41,6 +41,15 @@ const Map = ({ travelPlansData, selectedDay }) => {
                     </Popup>
                 </Marker>
             ))}
+            {travelPlansData.startDate !== travelPlansData.endDate && (
+                <>
+                    <Marker position={[placeToRest.latitude, placeToRest.longitude]}>
+                        <Popup>
+                            {travelPlansData.placeToRest.place}
+                        </Popup>
+                    </Marker>
+                </>
+            )}
             </MapContainer>
         </div>
     );
@@ -50,6 +59,8 @@ Map.propTypes = {
     selectedDay: PropTypes.number,
     travelPlansData: PropTypes.shape({
         destination: PropTypes.string.isRequired,
+        startDate: PropTypes.string.isRequired,
+        endDate: PropTypes.string.isRequired,
         itinerary: PropTypes.arrayOf(PropTypes.shape({
             activities: PropTypes.arrayOf(PropTypes.shape({
                 id: PropTypes.number.isRequired,
@@ -60,7 +71,13 @@ Map.propTypes = {
         })).isRequired,
         latitude: PropTypes.number.isRequired,
         longitude: PropTypes.number.isRequired,
-    }).isRequired,
+        placeToRest: PropTypes.shape({
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
+            place: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired, 
+        }).isRequired,
+    })
 };
 
 export default Map;

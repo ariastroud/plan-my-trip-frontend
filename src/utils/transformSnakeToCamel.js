@@ -5,6 +5,7 @@ const keyMapping = {
   day_number: "dayNumber",
   places_to_eat: "placesToEat",
   day: "dayNumber",
+  PlaceToRest: "placeToRest",
 };
 
 const convertToCamelCase = (obj) => {

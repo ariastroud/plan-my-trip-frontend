@@ -34,6 +34,7 @@ const SavedTrips = ({ userId }) => {
       startDate: trip.start_date,
       endDate: trip.end_date,
       budget: trip.budget,
+      placeToRest: trip.place_to_rest,
       itinerary: []
     };
 

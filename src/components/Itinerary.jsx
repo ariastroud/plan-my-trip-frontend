@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Itinerary = ({ travelPlansData, handleDayClick}) => {
-    const { itinerary } = travelPlansData;
+    const { itinerary, placeToRest } = travelPlansData;
     
     if (!itinerary || itinerary.length === 0) {
         return <div>An error occurred! Missing itinerary data.</div>;
@@ -9,6 +9,14 @@ const Itinerary = ({ travelPlansData, handleDayClick}) => {
 
     return (
         <div>
+            <div className='p-4'>
+                {travelPlansData.startDate !== travelPlansData.endDate && (
+                <>
+                    <h2 className="font-spaceMono font-bold text-lg">Where to Stay</h2>
+                    <span className="font-bold">{placeToRest.place}</span>: <span>{placeToRest.description}</span>
+                </>
+            )}
+            </div>
             <ol className='text-left'>
                 {itinerary.map((day) => {
                     return (
@@ -44,6 +52,8 @@ Itinerary.propTypes = {
     handleDayClick: PropTypes.func.isRequired,
     travelPlansData: PropTypes.shape({
         destination: PropTypes.string.isRequired,
+        startDate: PropTypes.string.isRequired,
+        endDate: PropTypes.string.isRequired,
         itinerary: PropTypes.arrayOf(PropTypes.shape({
             activities: PropTypes.arrayOf(PropTypes.shape({
                 id: PropTypes.number.isRequired,
@@ -54,7 +64,13 @@ Itinerary.propTypes = {
         })).isRequired,
         latitudeDestination: PropTypes.number.isRequired,
         longitudeDestination: PropTypes.number.isRequired,
+        placeToRest: PropTypes.shape({
+            place: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            latitude: PropTypes.number.isRequired,
+            longitude: PropTypes.number.isRequired,
     }).isRequired,
+})
 };
 
 export default Itinerary;

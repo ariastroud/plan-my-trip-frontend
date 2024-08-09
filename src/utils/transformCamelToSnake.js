@@ -5,6 +5,7 @@ const keyMapping = {
   startDate: "start_date",
   endDate: "end_date",
   dayNumber: "day",
+  placeToRest: "PlaceToRest",
 };
 
 const convertToSnakeCase = (obj) => {
