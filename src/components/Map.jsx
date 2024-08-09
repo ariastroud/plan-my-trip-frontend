@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { bedIcon, activityIcon, diningIcon } from '../assets/icons/icons';
+import FitBoundsMap from './FitBoundsMap';
 
 const Map = ({ travelPlansData, selectedDay }) => {
     const { itinerary, latitude, longitude, placeToRest } = travelPlansData;
@@ -35,6 +37,7 @@ const Map = ({ travelPlansData, selectedDay }) => {
                 <Marker
                     key={index}
                     position={[Number(marker.latitude), Number(marker.longitude)]}
+                    icon={ (marker.type === 'activity' ? activityIcon : diningIcon) }
                 >
                     <Popup>
                         {marker.type === 'activity' ? marker.activity : marker.place}
@@ -43,13 +46,14 @@ const Map = ({ travelPlansData, selectedDay }) => {
             ))}
             {travelPlansData.startDate !== travelPlansData.endDate && (
                 <>
-                    <Marker position={[placeToRest.latitude, placeToRest.longitude]}>
+                    <Marker position={[placeToRest.latitude, placeToRest.longitude]} icon={bedIcon}>
                         <Popup>
                             {travelPlansData.placeToRest.place}
                         </Popup>
                     </Marker>
                 </>
             )}
+            <FitBoundsMap markers={filteredMarkers} />
             </MapContainer>
         </div>
     );

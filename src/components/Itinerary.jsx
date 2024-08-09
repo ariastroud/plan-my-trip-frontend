@@ -39,7 +39,6 @@ const Itinerary = ({ travelPlansData, handleDayClick}) => {
                                     ))}
                                 </ul>
                             </div>
-                    
                         </li>
                     );
                 })}
