@@ -78,9 +78,8 @@ const PlanTrip = ({handleTravelPlansData}) => {
       const formattedRequestBody = transformCamelToSnake(requestBody);
       console.log("formattedRequestBody:", formattedRequestBody);
 
-      //`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`
-      // 'https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan'
-        const response = await axios.post('https://plan-my-trip-backend-kxq6.onrender.com/trips/generate-trip-plan', formattedRequestBody,);
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, formattedRequestBody,);
+        console.log('trip response', response.data);
         clearTimeout(timeoutId);
         handleTravelPlansData(response.data);
 
@@ -108,8 +107,20 @@ const PlanTrip = ({handleTravelPlansData}) => {
     }
 
     const handleSelectedLocation = (location) => {
-      console.log(location)
-      setDestination(location.display_name);
+      const destination = formatDestination(location);
+      setDestination(destination);
+    };
+
+    const formatDestination = (location) => {
+      if (location.type === 'city') {
+        if (location.address.country_code === 'us') {
+          return `${location.address.name}, ${location.address.state}, USA`;
+        } else {
+          return `${location.address.name}, ${location.address.country}`;
+        }
+      } else {
+        return location.display_name;
+      }
     };
 
   return (
