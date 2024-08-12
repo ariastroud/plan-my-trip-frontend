@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import PlanTrip from '../components/PlanTrip';
 import TravelPlan from '../components/TravelPlan';
-import convertToCamelCase from '../utils/transformSnakeToCamel';
 import convertToSnakeCase from '../utils/transformCamelToSnake';
 import axios from 'axios';
 import NavBar from '../components/NavBar';
@@ -15,8 +14,7 @@ const TripManager = () => {
     const [savedStatus, setSavedStatus] = useState(null);
 
     const handleTravelPlansData = (data) => {
-        const transformedData = convertToCamelCase(data);
-        setTravelPlansData(transformedData);
+        setTravelPlansData(data);
     };
 
     const saveTrip = async () => {

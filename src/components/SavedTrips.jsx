@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import TravelPlan from '../components/TravelPlan';
+import PropTypes from 'prop-types';
 
 const SavedTrips = ({ userId }) => {
   const [trips, setTrips] = useState([]);
@@ -114,6 +115,10 @@ const SavedTrips = ({ userId }) => {
       )}
     </>
   );
+};
+
+SavedTrips.propTypes = {
+  userId: PropTypes.number.isRequired,
 };
 
 export default SavedTrips;

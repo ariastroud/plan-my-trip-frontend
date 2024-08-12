@@ -1,6 +1,7 @@
 import Itinerary from "./Itinerary";
 import Map from "./Map";
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 
 const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
     useEffect(() => {
@@ -23,7 +24,7 @@ const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
   const startDate = formatDate(travelPlansData.startDate);
   const endDate = formatDate(travelPlansData.endDate);
 
-
+  console.log('TravelPlan received data:', travelPlansData);
     return (
       <div>
         <div className="mx-8">
@@ -50,6 +51,44 @@ const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
       </div>
 
     );
+};
+
+TravelPlan.propTypes = {
+  travelPlansData: PropTypes.shape({
+    destination: PropTypes.string.isRequired,
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    startDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string.isRequired,
+    budget: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    placeToRest: PropTypes.shape({
+      place: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    }),
+    itinerary: PropTypes.arrayOf(PropTypes.shape({
+      dayNumber: PropTypes.number.isRequired,
+      activities: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        activity: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+      })),
+      placesToEat: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        place: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+      })),
+    })),
+  }),
+  backToTrips: PropTypes.func,
+  saveTrip: PropTypes.func,
+  savedStatus: PropTypes.string,
 };
 
 export default TravelPlan;

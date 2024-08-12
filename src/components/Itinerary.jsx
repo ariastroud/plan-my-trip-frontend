@@ -23,8 +23,8 @@ const Itinerary = ({ travelPlansData, handleDayClick}) => {
                         <li className='p-4' key={day.dayNumber}>
                             <h2 className='font-bold text-lg hover:underline cursor-pointer hover:text-bright-green font-spaceMono' onClick={() => handleDayClick(day.dayNumber)}>Day {day.dayNumber}</h2>
                             <ul className="list-disc">
-                                {day.activities.map((activity) => (
-                                    <li key={activity.id}>
+                                {day.activities.map((activity, index) => (
+                                    <li key={activity.id || index}>
                                         <span className="font-semibold">{activity.activity}</span>: <span>{activity.description}</span>
                                     </li>   
                                 ))}
@@ -32,8 +32,8 @@ const Itinerary = ({ travelPlansData, handleDayClick}) => {
                             <div>
                                 <h3 className='font-bold mt-4'>Where to Eat</h3>
                                 <ul className="list-disc">
-                                    {day.placesToEat.map((restaurant) => (
-                                        <li key={restaurant.id}>
+                                    {day.placesToEat.map((restaurant, index) => (
+                                        <li key={restaurant.id || index}>
                                             <span className="font-semibold">{restaurant.place}</span>: <span>{restaurant.description}</span>
                                         </li>   
                                     ))}

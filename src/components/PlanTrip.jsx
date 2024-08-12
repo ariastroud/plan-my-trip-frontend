@@ -3,6 +3,8 @@ import Datepicker from "react-tailwindcss-datepicker";
 import axios from "axios";
 import transformCamelToSnake from '../utils/transformCamelToSnake';
 import SearchDestination from './SearchDestination';
+import convertToCamelCase from '../utils/transformSnakeToCamel';
+import PropTypes from 'prop-types';
 
 // const options = [
 //     { value: 'adventure', label: 'Adventure' },
@@ -80,8 +82,9 @@ const PlanTrip = ({handleTravelPlansData}) => {
 
         const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/trips/generate-trip-plan`, formattedRequestBody,);
         console.log('trip response', response.data);
+        const transformedData = convertToCamelCase(response.data);
+        handleTravelPlansData(transformedData);
         clearTimeout(timeoutId);
-        handleTravelPlansData(response.data);
 
     } catch (error) {
         clearTimeout(timeoutId);
@@ -168,6 +171,10 @@ const PlanTrip = ({handleTravelPlansData}) => {
       </div>
     </div>
   );
+};
+
+PlanTrip.propTypes = {
+  handleTravelPlansData: PropTypes.func.isRequired,
 };
 
 export default PlanTrip;
