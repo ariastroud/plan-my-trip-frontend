@@ -35,6 +35,7 @@ const SavedTrips = ({ userId }) => {
       endDate: trip.end_date,
       budget: trip.budget,
       placeToRest: trip.place_to_rest,
+      description: trip.description,
       itinerary: []
     };
 
@@ -77,7 +78,9 @@ const SavedTrips = ({ userId }) => {
   return (
     <>
       {selectedTripData ? (
-        <TravelPlan travelPlansData={selectedTripData} backToTrips={backToTrips} />
+        <div className="tab-content bg-base-100 border-base-300 rounded-box p-6 w-full">
+          <TravelPlan travelPlansData={selectedTripData} backToTrips={backToTrips} />
+        </div>
       ) : (
         <div className="tab-content bg-base-100 border-base-300 rounded-box p-6">
           <div className="grid grid-cols-1 gap-8 w-1/2 m-auto">
@@ -90,6 +93,7 @@ const SavedTrips = ({ userId }) => {
                     Dates: {trip.start_date} to {trip.end_date}
                   </p>
                   <p>Budget: ${trip.budget}</p>
+                  <p>{trip.description}</p>
                   <div className="card-actions justify-end">
                     <button
                       onClick={(e) => {

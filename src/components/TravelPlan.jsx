@@ -30,7 +30,8 @@ const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
             <h1 className="font-extrabold text-2xl text-center font-spaceMono pt-5">Travel Plan for {travelPlansData.destination}</h1>
             <p className="text-center">{startDate} - {endDate}</p>
             <p className="text-center">Budget: ${travelPlansData.budget}</p>
-            <div className="pb-2 text-left">
+            <p className="text-center">{travelPlansData.description}</p>
+            <div className="pb-2 pt-4 text-left">
               {backToTrips ?
               <button
                 className="btn btn-primary"

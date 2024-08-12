@@ -18,3 +18,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.tab {
+  width: 150px !important;
+}
