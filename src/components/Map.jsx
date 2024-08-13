@@ -27,7 +27,7 @@ const Map = ({ travelPlansData, selectedDay }) => {
     });
 
     return (
-        <div className="h-screen w-full">
+        <div className="relative h-full w-full">
             <MapContainer className="h-full w-full" center={[latitude, longitude]} zoom={12} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

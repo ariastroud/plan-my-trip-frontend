@@ -79,11 +79,12 @@ const SavedTrips = ({ userId }) => {
   return (
     <>
       {selectedTripData ? (
-        <div className="tab-content bg-base-100 border-base-300 rounded-box p-6 w-full">
+        <div className= "flex flex-col h-screen overflow-hidden">
+          <div className="flex-1 overflow-auto"> 
           <TravelPlan travelPlansData={selectedTripData} backToTrips={backToTrips} />
+          </div>
         </div>
       ) : (
-        <div className="tab-content bg-base-100 border-base-300 rounded-box p-6">
           <div className="grid grid-cols-1 gap-8 w-1/2 m-auto">
           {trips.map((trip) => (
             <div key={trip.id}>
@@ -111,7 +112,6 @@ const SavedTrips = ({ userId }) => {
             </div>
           ))}
           </div>
-        </div>
       )}
     </>
   );

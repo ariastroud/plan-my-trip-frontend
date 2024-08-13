@@ -6,12 +6,6 @@ import SearchDestination from './SearchDestination';
 import convertToCamelCase from '../utils/transformSnakeToCamel';
 import PropTypes from 'prop-types';
 
-// const options = [
-//     { value: 'adventure', label: 'Adventure' },
-//     { value: 'relaxation', label: 'Relaxation' },
-//     { value: 'sightseeing', label: 'Sightseeing' },
-//     { value: 'family', label: 'Family' },
-//   ];
 const PlanTrip = ({handleTravelPlansData}) => {
   const [loading, setLoading] = useState(false);
   const [ destination, setDestination ] = useState(''),
@@ -20,8 +14,6 @@ const PlanTrip = ({handleTravelPlansData}) => {
           endDate: null
           }),
         [ budget, setBudget ]           = useState('');
-        // [ travelStyle, setTravelStyle ] = useState(''),
-        // [ preferences, setPreferences ] = useState('');
 
 
   const handleDateChange = (newDates) => {
@@ -96,17 +88,18 @@ const PlanTrip = ({handleTravelPlansData}) => {
     };
 
     if (loading) {
-        return <div>
-          <div className="flex justify-center items-center h-screen">
+        return <div className="h-3/4 flex items-center justify-center overflow-hidden">
+        <div className="flex items-center space-x-4">
             <div className="loading loading-spinner loading-lg text-primary"></div>
-            <p className="ml-4 text-lg">Generating your trip plan. Please wait a moment...
-              <br />
+            <div>
+                <p className="text-lg">Generating your trip plan. Please wait a moment...</p>
                 <small className="text-gray-500">
-                  * Note: The AI-generated plan may not always be accurate or up-to-date. Please verify details before making any travel arrangements.
+                    * Note: The AI-generated plan may not always be accurate or up-to-date. Please verify details before making any travel arrangements.
                 </small>
-            </p>
-          </div>
-        </div>;
+            </div>
+        </div>
+    </div>;
+        
     }
 
     const handleSelectedLocation = (location) => {
@@ -127,7 +120,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
     };
 
   return (
-    <div className="grid grid-cols-2 h-screen">
+    <div className="grid grid-cols-2">
       <div className="flex flex-col pl-24 pt-10">
         <h1 className="font-spaceMono font-bold text-6xl text-left mb-4">Plan Your Trip</h1>
       </div>

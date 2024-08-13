@@ -9,7 +9,7 @@ const Itinerary = ({ travelPlansData, handleDayClick}) => {
 
     return (
         <div>
-            <div className='p-4'>
+            <div className='pt-4'>
                 {travelPlansData.startDate !== travelPlansData.endDate && (
                 <>
                     <h2 className="font-spaceMono font-bold text-lg">Where to Stay</h2>

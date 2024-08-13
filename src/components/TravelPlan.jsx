@@ -26,30 +26,29 @@ const TravelPlan = ({travelPlansData, backToTrips, saveTrip, savedStatus}) => {
 
   console.log('TravelPlan received data:', travelPlansData);
     return (
-      <div>
-        <div className="mx-8">
-            <h1 className="font-extrabold text-2xl text-center font-spaceMono pt-5">Travel Plan for {travelPlansData.destination}</h1>
-            <p className="text-center">{startDate} - {endDate}</p>
-            <p className="text-center">Budget: ${travelPlansData.budget}</p>
-            <p className="text-center">{travelPlansData.description}</p>
-            <div className="pb-2 pt-4 text-left">
-              {backToTrips ?
-              <button
-                className="btn btn-primary"
-                onClick={backToTrips}>Back to Trips</button>
-              : <button
-                className="btn btn-primary"
-                onClick={saveTrip}>
-                  {savedStatus === 'saved' ? '♥ Trip Saved' : '♡ Save Trip'}
-                  </button>}
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-                <Itinerary travelPlansData={travelPlansData} handleDayClick={handleDayClick}/>
-                <Map travelPlansData={travelPlansData} selectedDay={selectedDay} />
-            </div>
+      <div className="flex flex-col h-full overflow-auto p-5 outline flex-1">
+      <div className="grid grid-cols-2 gap-4 flex-1 h-full">
+        <div className="overflow-auto">
+          <div className="text-left">
+            {backToTrips ? (
+              <button className="btn btn-primary" onClick={backToTrips}>Back to Trips</button>
+            ) : (
+              <button className="btn btn-primary" onClick={saveTrip}>
+                {savedStatus === 'saved' ? '♥ Trip Saved' : '♡ Save Trip'}
+              </button>
+            )}
+          </div>
+          <h1 className="font-extrabold text-2xl font-spaceMono pt-3">Travel Plan for {travelPlansData.destination}</h1>
+          <p className="font-bold">{startDate} - {endDate}</p>
+          <p className="font-bold">Budget: ${travelPlansData.budget}</p>
+          <p>{travelPlansData.description}</p>
+          <Itinerary travelPlansData={travelPlansData} handleDayClick={handleDayClick} />
+        </div>
+        <div className="h-full rounded-lg overflow-hidden z-0">
+          <Map travelPlansData={travelPlansData} selectedDay={selectedDay} />
         </div>
       </div>
-
+    </div>
     );
 };
 

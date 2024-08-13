@@ -37,12 +37,16 @@ const TripManager = () => {
     }, [location.pathname, location.search]);
 
     return (
-        <div>
-          <NavBar />
-            <div>
-                {(!travelPlansData) ? <PlanTrip handleTravelPlansData={handleTravelPlansData} /> : <TravelPlan travelPlansData={travelPlansData} saveTrip={saveTrip} savedStatus={savedStatus}/>}
-            </div>
-        </div>
+      <div className="flex flex-col h-screen overflow-hidden">
+      <NavBar />
+      <div className="flex-1 overflow-auto">
+        {(!travelPlansData) ? (
+          <PlanTrip handleTravelPlansData={handleTravelPlansData} />
+        ) : (
+          <TravelPlan travelPlansData={travelPlansData} saveTrip={saveTrip} savedStatus={savedStatus} />
+        )}
+      </div>
+    </div>
     );
 };
 
