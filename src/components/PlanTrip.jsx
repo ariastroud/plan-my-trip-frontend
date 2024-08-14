@@ -158,7 +158,7 @@ const PlanTrip = ({handleTravelPlansData}) => {
             type="submit"
             onClick={handleGeneratePlan}
           >
-            Generate Travel Plan
+            Generate Trip Plan
           </button>
         </form>
       </div>
